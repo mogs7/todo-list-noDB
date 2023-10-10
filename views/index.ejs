@@ -1,0 +1,35 @@
+<%- include('partials/header.ejs') %>
+<% var listText = "Today is " %>
+<% var listType = "/submit" %>
+
+<div class="flex flex-col items-center h-full w-[75%] bg-gradient-to-bl from-[#C3073F] to-[#6F2232] p-5 box-border rounded-lg shadow-xl">
+    <% const date = new Date; const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %>
+    <% console.log(workList) %>
+    <% if (locals.workList) { %>
+        <% if (workList) {%>
+            <% listText = "Work for " %>
+            <% listType = "/work" %>
+        <% } else { %>
+            <% listText = "Today is " %>
+            <% listType = "/submit" %>
+        <% } %>
+    <% } %>
+    <h1> <%= listText %> <%= months[date.getMonth()] %> <%= date.getDate() %>, <%= date.getFullYear() %>!  </h1>
+    <div class="flex flex-col h-full w-full items-center">
+        <form action=<%=listType%> method="post" class="flex h-[17%] w-full place-content-center mb-5">
+            <input type="text" name="todoItem" autocomplete="off">
+            <button type="submit" class="w-[4rem] ml-4"><img class="submit-button" src="images/plus.png" alt="submit button"></button>
+        </form>
+        <ul class="flex flex-col h-[80%] w-[80%]">
+            <% if (locals.newItem) { %>
+                <% for( let i=0;i<newItem.length;i++ ) { %>
+                    <li><input type="checkbox" name="inputCheckbox" class="mx-10" onclick="addStrike(this)"> <label> <%= newItem[i] %> </label></li>
+                <% } %>
+            <% } %>
+        </ul>
+    </div>
+</div>
+
+
+
+<%- include('partials/footer.ejs') %>
